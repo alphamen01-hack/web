@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+    <rect width="1200" height="750" fill="#100202"/>
+    <rect x="30" y="30" width="1140" height="690" fill="none" stroke="#ff1a1a" stroke-opacity=".45"/>
+    <text x="600" y="350" fill="#fff4ef" font-family="Arial" font-size="54" text-anchor="middle">CERTIFICATE 01</text>
+    <text x="600" y="420" fill="#ff1a1a" font-family="Arial" font-size="25" text-anchor="middle">ADD YOUR CERTIFICATE IMAGE</text>
+    </svg>
