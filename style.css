@@ -82,3 +82,770 @@ footer{border-top:1px solid var(--line);padding:55px 0 25px}.footer-top{display:
   }
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}[data-reveal]{opacity:1;transform:none}}
+/* =========================================================
+   ASK ALPHA AI — CYBERSECURITY PORTFOLIO CHATBOX
+   Add this AFTER your existing CSS
+   ========================================================= */
+
+/* ---------- AI CHAT ROOT ---------- */
+
+#askAlphaAI {
+  --ai-red: var(--cyan);
+  --ai-white: var(--violet);
+  --ai-bg: #090000;
+  --ai-panel: #120303;
+  --ai-panel-2: #190404;
+  --ai-text: var(--text);
+  --ai-dim: var(--text-dim);
+
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  z-index: 9996;
+  font-family: var(--font-body);
+}
+
+
+/* ---------- FLOATING BUTTON ---------- */
+
+#askAlphaButton {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255,244,239,.12),
+      transparent 55%
+    ),
+    var(--ai-bg);
+
+  color: var(--ai-red);
+
+  box-shadow:
+    0 0 18px rgba(255,26,26,.25),
+    inset 0 0 18px rgba(255,26,26,.05);
+
+  cursor: pointer;
+
+  position: relative;
+
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease),
+    border-color .35s var(--ease);
+}
+
+#askAlphaButton:hover {
+  transform: translateY(-4px) scale(1.05);
+
+  border-color: var(--ai-red);
+
+  box-shadow:
+    0 0 20px rgba(255,26,26,.45),
+    0 0 45px rgba(255,26,26,.18),
+    inset 0 0 20px rgba(255,26,26,.08);
+}
+
+
+/* AI ICON */
+
+.ask-alpha-icon {
+  font-size: 24px;
+  line-height: 1;
+
+  filter:
+    drop-shadow(0 0 6px rgba(255,26,26,.7));
+}
+
+
+/* ONLINE DOT */
+
+.ask-alpha-online-dot {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  right: 2px;
+  bottom: 4px;
+
+  border-radius: 50%;
+
+  background: #ff1a1a;
+
+  border: 2px solid var(--ai-bg);
+
+  box-shadow:
+    0 0 7px #ff1a1a,
+    0 0 15px rgba(255,26,26,.7);
+
+  animation: alphaOnlinePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes alphaOnlinePulse {
+  50% {
+    transform: scale(1.25);
+    opacity: .65;
+  }
+}
+
+
+/* ---------- CHAT WINDOW ---------- */
+
+#askAlphaWindow {
+  position: absolute;
+
+  right: 0;
+  bottom: 78px;
+
+  width: 390px;
+  height: 570px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255,26,26,.09),
+      transparent 35%
+    ),
+    linear-gradient(
+      160deg,
+      #170404,
+      #070000 75%
+    );
+
+  border: 1px solid var(--line-strong);
+
+  box-shadow:
+    0 0 35px rgba(255,26,26,.18),
+    0 0 90px rgba(255,26,26,.06);
+
+  clip-path:
+    polygon(
+      0 0,
+      calc(100% - 18px) 0,
+      100% 18px,
+      100% 100%,
+      18px 100%,
+      0 calc(100% - 18px)
+    );
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform:
+    translateY(15px)
+    scale(.96);
+
+  transform-origin: bottom right;
+
+  transition:
+    opacity .3s var(--ease),
+    visibility .3s var(--ease),
+    transform .3s var(--ease);
+}
+
+#askAlphaWindow.open {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* ---------- CHAT HEADER ---------- */
+
+.ask-alpha-header {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 17px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,26,26,.08),
+      transparent
+    );
+
+  border-bottom: 1px solid var(--line);
+}
+
+.ask-alpha-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.ask-alpha-logo {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line-strong);
+
+  background: #0d0101;
+
+  color: var(--ai-red);
+
+  font-family: var(--font-display);
+  font-size: 13px;
+
+  box-shadow:
+    0 0 13px rgba(255,26,26,.15);
+}
+
+.ask-alpha-title {
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: .13em;
+
+  color: var(--text);
+}
+
+.ask-alpha-subtitle {
+  margin-top: 3px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--text-faint);
+
+  font-family: var(--font-body);
+
+  font-size: 9px;
+
+  letter-spacing: .08em;
+}
+
+.ask-alpha-status {
+  color: var(--ai-red);
+}
+
+.ask-alpha-close {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--text-dim);
+
+  border: 1px solid transparent;
+
+  font-size: 21px;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.ask-alpha-close:hover {
+  color: var(--ai-red);
+
+  border-color: var(--line);
+
+  background: rgba(255,26,26,.05);
+}
+
+
+/* ---------- AI SCAN LINE ---------- */
+
+.ask-alpha-scan {
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--ai-red),
+      var(--ai-white),
+      transparent
+    );
+
+  opacity: .7;
+
+  animation: alphaScan 3s linear infinite;
+}
+
+@keyframes alphaScan {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+/* ---------- MESSAGES ---------- */
+
+#askAlphaMessages {
+  flex: 1;
+
+  overflow-y: auto;
+
+  padding: 17px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,26,26,.35) transparent;
+}
+
+#askAlphaMessages::-webkit-scrollbar {
+  width: 4px;
+}
+
+#askAlphaMessages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#askAlphaMessages::-webkit-scrollbar-thumb {
+  background: rgba(255,26,26,.35);
+}
+
+
+/* MESSAGE */
+
+.ask-alpha-message {
+  max-width: 88%;
+
+  padding: 11px 13px;
+
+  font-family: var(--font-body);
+
+  font-size: 11.5px;
+
+  line-height: 1.7;
+
+  white-space: pre-wrap;
+
+  word-break: break-word;
+
+  animation: alphaMessageIn .3s var(--ease);
+}
+
+@keyframes alphaMessageIn {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* BOT */
+
+.ask-alpha-message.bot {
+  align-self: flex-start;
+
+  color: var(--ai-dim);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,26,26,.07),
+      rgba(10,0,0,.5)
+    );
+
+  border: 1px solid var(--line);
+
+  border-left: 2px solid var(--ai-red);
+
+  clip-path:
+    polygon(
+      0 0,
+      calc(100% - 9px) 0,
+      100% 9px,
+      100% 100%,
+      0 100%
+    );
+}
+
+
+/* USER */
+
+.ask-alpha-message.user {
+  align-self: flex-end;
+
+  color: var(--text);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,26,26,.16),
+      rgba(255,26,26,.05)
+    );
+
+  border: 1px solid var(--line-strong);
+
+  border-right: 2px solid var(--ai-white);
+
+  clip-path:
+    polygon(
+      9px 0,
+      100% 0,
+      100% calc(100% - 9px),
+      calc(100% - 9px) 100%,
+      0 100%,
+      0 9px
+    );
+}
+
+
+/* ---------- WELCOME LABEL ---------- */
+
+.ask-alpha-label {
+  color: var(--ai-red);
+
+  font-size: 9px;
+
+  letter-spacing: .18em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 5px;
+}
+
+
+/* ---------- TYPING INDICATOR ---------- */
+
+.ask-alpha-typing {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 12px 14px;
+}
+
+.ask-alpha-typing span {
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: var(--ai-red);
+
+  animation: alphaTyping 1.2s infinite;
+}
+
+.ask-alpha-typing span:nth-child(2) {
+  animation-delay: .15s;
+}
+
+.ask-alpha-typing span:nth-child(3) {
+  animation-delay: .3s;
+}
+
+@keyframes alphaTyping {
+  0%,
+  60%,
+  100% {
+    opacity: .25;
+    transform: translateY(0);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+
+/* ---------- QUICK PROMPTS ---------- */
+
+#askAlphaSuggestions {
+  display: flex;
+
+  gap: 7px;
+
+  padding: 9px 12px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  border-top: 1px solid rgba(255,26,26,.08);
+}
+
+#askAlphaSuggestions::-webkit-scrollbar {
+  display: none;
+}
+
+.ask-alpha-suggestion {
+  flex: 0 0 auto;
+
+  padding: 7px 10px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 999px;
+
+  background: rgba(255,26,26,.025);
+
+  color: var(--text-dim);
+
+  font-size: 9px;
+
+  letter-spacing: .04em;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.ask-alpha-suggestion:hover {
+  color: var(--ai-red);
+
+  border-color: var(--line-strong);
+
+  background: rgba(255,26,26,.07);
+
+  box-shadow: 0 0 10px rgba(255,26,26,.08);
+}
+
+
+/* ---------- INPUT AREA ---------- */
+
+.ask-alpha-input-wrap {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 10px 12px;
+
+  background: rgba(5,0,0,.8);
+
+  border-top: 1px solid var(--line);
+}
+
+#askAlphaInput {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 42px;
+
+  padding: 0 12px;
+
+  background: #070000;
+
+  border: 1px solid var(--line);
+
+  border-radius: 5px;
+
+  outline: none;
+
+  color: var(--text);
+
+  font-family: var(--font-body);
+
+  font-size: 11px;
+
+  transition: .25s;
+}
+
+#askAlphaInput::placeholder {
+  color: var(--text-faint);
+}
+
+#askAlphaInput:focus {
+  border-color: var(--line-strong);
+
+  box-shadow:
+    0 0 12px rgba(255,26,26,.08);
+}
+
+
+/* SEND */
+
+#askAlphaSend {
+  flex: 0 0 42px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--line-strong);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,244,239,.9),
+      rgba(255,26,26,.9)
+    );
+
+  color: #180300;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  clip-path:
+    polygon(
+      8px 0,
+      100% 0,
+      100% calc(100% - 8px),
+      calc(100% - 8px) 100%,
+      0 100%,
+      0 8px
+    );
+
+  transition: .25s;
+}
+
+#askAlphaSend:hover {
+  filter: brightness(1.25);
+
+  box-shadow:
+    0 0 18px rgba(255,26,26,.35);
+}
+
+#askAlphaSend:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.ask-alpha-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 6px 13px 8px;
+
+  color: var(--text-faint);
+
+  font-size: 7px;
+
+  letter-spacing: .1em;
+
+  text-transform: uppercase;
+}
+
+.ask-alpha-footer span:first-child {
+  color: rgba(255,26,26,.6);
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:620px) {
+
+  #askAlphaAI {
+    right: 14px;
+    bottom: 14px;
+  }
+
+  #askAlphaButton {
+    width: 57px;
+    height: 57px;
+  }
+
+  #askAlphaWindow {
+    position: fixed;
+
+    right: 10px;
+    left: 10px;
+
+    bottom: 82px;
+
+    width: auto;
+
+    height: min(70vh, 560px);
+
+    transform-origin: bottom center;
+  }
+
+  .ask-alpha-message {
+    font-size: 11px;
+  }
+
+  #askAlphaInput {
+    font-size: 12px;
+  }
+
+}
+
+
+/* ---------- VERY SMALL DEVICES ---------- */
+
+@media(max-width:380px) {
+
+  #askAlphaWindow {
+    right: 6px;
+    left: 6px;
+    bottom: 76px;
+  }
+
+  .ask-alpha-header {
+    min-height: 65px;
+  }
+
+  #askAlphaMessages {
+    padding: 12px;
+  }
+
+  .ask-alpha-message {
+    max-width: 92%;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media(prefers-reduced-motion:reduce) {
+
+  #askAlphaWindow,
+  #askAlphaButton,
+  .ask-alpha-message,
+  .ask-alpha-scan,
+  .ask-alpha-online-dot,
+  .ask-alpha-typing span {
+    animation: none !important;
+    transition: none !important;
+  }
+
+   }
