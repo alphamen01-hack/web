@@ -973,4 +973,134 @@ Do not automatically navigate users anywhere.
 The job of Ask Alpha AI is to explain and represent
 the portfolio accurately.
 
-========
+// ==========================================
+// API HANDLER
+// ==========================================
+
+export default async function handler(req, res) {
+
+  // Only allow POST
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
+  }
+
+  // Check Gemini API key
+  if (!process.env.GEMINI_API_KEY) {
+    console.error("GEMINI_API_KEY is missing.");
+
+    return res.status(500).json({
+      error: "AI service is not configured."
+    });
+  }
+
+  // Identify visitor
+  const visitorId = getVisitorId(req);
+
+  // Apply rate limit
+  const rateLimit = checkRateLimit(visitorId);
+
+  if (!rateLimit.allowed) {
+    return res.status(429).json({
+      error: rateLimit.message
+    });
+  }
+
+  // Read request body
+  const body = req.body || {};
+
+  const message =
+    typeof body.message === "string"
+      ? body.message.trim()
+      : "";
+
+  // Empty message
+  if (!message) {
+    return res.status(400).json({
+      error: "Message is required."
+    });
+  }
+
+  // Maximum message length
+  if (message.length > 1000) {
+    return res.status(400).json({
+      error: "Message is too long."
+    });
+  }
+
+  // ==========================================
+  // CONVERSATION HISTORY
+  // ==========================================
+
+  const history = Array.isArray(body.history)
+    ? body.history
+        .filter(item =>
+          item &&
+          (item.role === "user" || item.role === "assistant") &&
+          typeof item.content === "string"
+        )
+        .slice(-6)
+        .map(item => ({
+          role:
+            item.role === "assistant"
+              ? "model"
+              : "user",
+
+          parts: [
+            {
+              text: item.content.slice(0, 1500)
+            }
+          ]
+        }))
+    : [];
+
+  try {
+
+    const contents = [
+      ...history,
+      {
+        role: "user",
+        parts: [
+          {
+            text: message
+          }
+        ]
+      }
+    ];
+
+    // ==========================================
+    // GEMINI
+    // ==========================================
+
+    const response = await ai.models.generateContent({
+
+      model: "gemini-3.1-flash-lite",
+
+      contents,
+
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+        maxOutputTokens: 400,
+        temperature: 0.7
+      }
+    });
+
+    const reply =
+      response.text?.trim() ||
+      "I couldn't generate a response right now.";
+
+    return res.status(200).json({
+      reply,
+      remainingRequests: rateLimit.remaining
+    });
+
+  } catch (error) {
+
+    console.error("Gemini API error:", error);
+
+    return res.status(500).json({
+      error: "AI service is temporarily unavailable."
+    });
+  }
+}
