@@ -134,5 +134,117 @@
 
 <div class="project-modal" id="projectModal"><div class="modal-box"><button class="modal-close" id="modalClose">×</button><span class="modal-kicker" id="modalKicker"></span><h2 id="modalTitle"></h2><p id="modalDescription"></p><div class="modal-stack" id="modalStack"></div><div class="modal-note" id="modalNote"></div></div></div>
 <script src="script.js" defer></script>
+<!-- ASK ALPHA AI -->
+<div id="askAlphaAI" aria-label="Ask Alpha AI assistant">
+
+  <div id="askAlphaWindow" role="dialog" aria-label="Ask Alpha AI">
+
+    <div class="ask-alpha-header">
+      <div class="ask-alpha-brand">
+        <div class="ask-alpha-logo">A</div>
+
+        <div>
+          <div class="ask-alpha-title">ASK ALPHA</div>
+          <div class="ask-alpha-subtitle">
+            <span>●</span> AI ONLINE
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="ask-alpha-close"
+        id="askAlphaClose"
+        type="button"
+        aria-label="Close AI chat"
+      >&times;</button>
+    </div>
+
+    <div class="ask-alpha-scan"></div>
+
+    <div id="askAlphaMessages">
+
+      <div class="ask-alpha-message bot">
+        <div class="ask-alpha-label">SYSTEM / ASK ALPHA</div>
+        Hey. I'm Ask Alpha — the AI assistant for this cybersecurity portfolio.
+        Ask me about projects, skills, technologies, digital forensics,
+        web security, or cybersecurity concepts.
+      </div>
+
+    </div>
+
+    <div id="askAlphaSuggestions">
+
+      <button
+        class="ask-alpha-suggestion"
+        type="button"
+        data-prompt="What cybersecurity projects are in this portfolio?"
+      >
+        PROJECTS
+      </button>
+
+      <button
+        class="ask-alpha-suggestion"
+        type="button"
+        data-prompt="What are the strongest cybersecurity skills in this portfolio?"
+      >
+        SKILLS
+      </button>
+
+      <button
+        class="ask-alpha-suggestion"
+        type="button"
+        data-prompt="Explain the Digital Forensics Toolkit project."
+      >
+        DFT
+      </button>
+
+      <button
+        class="ask-alpha-suggestion"
+        type="button"
+        data-prompt="What cybersecurity career areas does this portfolio focus on?"
+      >
+        FOCUS
+      </button>
+
+    </div>
+
+    <form class="ask-alpha-input-wrap" id="askAlphaForm">
+
+      <input
+        id="askAlphaInput"
+        type="text"
+        maxlength="1000"
+        autocomplete="off"
+        placeholder="Ask about the portfolio..."
+        aria-label="Ask Alpha message"
+      >
+
+      <button
+        id="askAlphaSend"
+        type="submit"
+        aria-label="Send message"
+      >
+        ➤
+      </button>
+
+    </form>
+
+    <div class="ask-alpha-footer">
+      <span>AUTHORIZED SECURITY USE</span>
+      <span>ASK ALPHA AI</span>
+    </div>
+
+  </div>
+
+  <button
+    id="askAlphaButton"
+    type="button"
+    aria-label="Open Ask Alpha AI"
+  >
+    <span class="ask-alpha-icon">⌁</span>
+    <span class="ask-alpha-online-dot"></span>
+  </button>
+
+</div>
 </body>
 </html>
