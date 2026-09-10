@@ -971,7 +971,8 @@ Do not say:
 Do not automatically navigate users anywhere.
 
 The job of Ask Alpha AI is to explain and represent
-the portfolio accurately.
+the portfolio accurately. 
+`;
 
 // ==========================================
 // API HANDLER
