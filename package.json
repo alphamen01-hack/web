@@ -1,6 +1,6 @@
 {
   "type": "module",
   "dependencies": {
-    "openai": "^5.23.2"
+    "@google/genai": "^2.21.0"
   }
 }
