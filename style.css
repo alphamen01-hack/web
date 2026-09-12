@@ -849,3 +849,45 @@ footer{border-top:1px solid var(--line);padding:55px 0 25px}.footer-top{display:
   }
 
    }
+
+/* AI attention pulse */
+#askAlphaButton {
+  position: relative;
+  animation: alphaPulse 2s ease-in-out infinite;
+}
+
+#askAlphaButton::before,
+#askAlphaButton::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: alphaRing 2.4s ease-out infinite;
+}
+
+#askAlphaButton::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes alphaPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes alphaRing {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
